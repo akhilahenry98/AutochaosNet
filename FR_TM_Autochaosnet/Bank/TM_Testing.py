@@ -36,9 +36,8 @@ Output:
 
 
 """
-import os
+
 import numpy as np
-from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from Codes import chaosnet
 from sklearn.metrics import f1_score
@@ -54,7 +53,7 @@ bank = np.array(pd.read_csv('data_banknote_authentication.txt', sep=",", header=
 #reading data and labels from the dataset
 X, y = bank[:,range(0,bank.shape[1]-1)], bank[:,bank.shape[1]-1]
 y = y.reshape(len(y),1)
-# X = X.astype(float)
+
 
 
 

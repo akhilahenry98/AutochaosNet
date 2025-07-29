@@ -3,6 +3,38 @@
 Created on Wed Nov 29 10:20:53 2023
 
 @author: Akhila Henry
+
+Description:
+------------
+This script performs classification on the dataset using the ChaosNet algorithm 
+with chaos-based features extracted via the ChaosFEX transform.
+
+Steps involved:
+---------------
+1. Loads the Haberman dataset.
+2. Extracts features (X) and labels (y)
+3. Reshapes labels to a 2D array for compatibility.
+4. Splits the dataset into training and testing sets using an 80-20 ratio.
+5. Applies min-max normalization to scale features to the [0, 1] range.
+6. Transforms both training and testing feature matrices using `ChaosFEX.transform`.
+7. Applies the `chaosnet` function to classify the transformed test data using cosine similarity 
+   with class-wise mean vectors.
+8. Evaluates performance using macro-averaged F1 Score.
+
+Modules Used:
+-------------
+- `pandas`: For reading the CSV file.
+- `numpy`: For numerical operations.
+- `sklearn.model_selection`: For splitting the dataset.
+- `sklearn.metrics`: For computing F1 score.
+- `ChaosFEX.feature_extractor`: For chaos-based feature extraction.
+- `Codes.chaosnet`: Classifier based on cosine similarity.
+
+Output:
+-------
+- Prints the macro F1 Score on the test set.
+
+
 """
 
 import numpy as np

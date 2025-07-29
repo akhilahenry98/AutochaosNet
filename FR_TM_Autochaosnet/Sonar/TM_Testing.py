@@ -6,36 +6,45 @@ Created on Wed Nov 29 10:20:53 2023
 
 Description:
 ------------
-This script performs classification on the dataset using the ChaosNet algorithm 
-with chaos-based features extracted via the ChaosFEX transform.
+This script evaluates the classification performance and computational efficiency 
+of the ChaosNet algorithm and chaos-based features extracted 
+via the `ChaosFEX` module.
 
-Steps involved:
----------------
-1. Loads the Haberman dataset.
-2. Extracts features (X) and labels (y)
-3. Reshapes labels to a 2D array for compatibility.
-4. Splits the dataset into training and testing sets using an 80-20 ratio.
-5. Applies min-max normalization to scale features to the [0, 1] range.
-6. Transforms both training and testing feature matrices using `ChaosFEX.transform`.
-7. Applies the `chaosnet` function to classify the transformed test data using cosine similarity 
-   with class-wise mean vectors.
-8. Evaluates performance using macro-averaged F1 Score.
+The key steps include:
+-----------------------
+1. Loading the dataset.
+2. Preprocessing:
+   - Extracting features and labels.
+   - Splitting the dataset into training and testing sets (80-20 split).
+   - Normalizing all features to the range [0, 1].
+3. For 50 iterations:
+   - Extract chaos-based features from training and testing data using 
+     `ChaosFEX.transform`.
+   - Classify test samples using the `chaosnet` function, which uses cosine 
+     similarity to compare test vectors with mean class vectors.
+   - Record the computation time for each iteration.
+4. Output:
+   - Average and variance of elapsed computation time.
+   - Final macro-averaged F1 Score for classification performance.
 
 Modules Used:
 -------------
-- `pandas`: For reading the CSV file.
-- `numpy`: For numerical operations.
-- `sklearn.model_selection`: For splitting the dataset.
-- `sklearn.metrics`: For computing F1 score.
-- `ChaosFEX.feature_extractor`: For chaos-based feature extraction.
-- `Codes.chaosnet`: Classifier based on cosine similarity.
+- `ChaosFEX.feature_extractor`: Extracts chaos-based features using a predefined method.
+- `Codes.chaosnet`: A lightweight classifier based on cosine similarity.
+- `sklearn.model_selection`: For train-test split.
+- `sklearn.metrics`: For computing macro F1 score.
+- `numpy`, `time`, `numba`: General numerical operations and timing.
 
 Output:
 -------
-- Prints the macro F1 Score on the test set.
+- Prints:
+  - Mean Elapsed Time across 50 runs
+  - Variance of Elapsed Time
+  - Macro F1 Score for test classification performance
 
 
 """
+
 
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -70,7 +79,7 @@ X_test_norm=(X_test-np.min(X_test,0))/(np.max(X_test,0)-np.min(X_test,0))
 
 Elapsed_Time=[]
 
-for i in np.arange(0,1):
+for i in np.arange(0,50):
     print('Iteration',i)
     begin=time.time()
 
