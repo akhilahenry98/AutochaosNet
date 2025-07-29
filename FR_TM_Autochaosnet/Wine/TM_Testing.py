@@ -1,0 +1,51 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 29 10:20:53 2023
+
+@author: Akhila Henry
+"""
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+from Codes import chaosnet
+from sklearn.metrics import f1_score
+import ChaosFEX.feature_extractor as CFX
+import pandas as pd
+
+
+
+#import the WINE Dataset 
+wine = np.array(pd.read_csv('wine_data.txt', sep=",", header=None))
+
+
+#reading data and labels from the dataset
+X, y = wine[:,range(1,wine.shape[1])], wine[:,0]
+y = y.reshape(len(y),1).astype(str)
+y = np.char.replace(y, '1.0', '0', count=None)
+y = np.char.replace(y, '2.0', '1', count=None)
+y = np.char.replace(y, '3.0', '2', count=None)
+y = y.astype(int)
+
+
+
+#Splitting the dataset for training and testing (80-20)
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state=1)
+
+#Normalisation of data [0,1]
+X_train_norm=(X_train-np.min(X_train,0))/(np.max(X_train,0)-np.min(X_train,0))
+X_test_norm=(X_test-np.min(X_test,0))/(np.max(X_test,0)-np.min(X_test,0))
+
+
+
+
+FEATURE_MATRIX_TRAIN = CFX.transform(X_train_norm)
+
+FEATURE_MATRIX_VAL = CFX.transform(X_test_norm)            
+
+mean_each_class, Y_PRED = chaosnet(FEATURE_MATRIX_TRAIN, y_train, FEATURE_MATRIX_VAL)
+
+f1 = f1_score(y_test, Y_PRED, average='macro')
+print('TESTING F1 SCORE', f1)
+
+
+
