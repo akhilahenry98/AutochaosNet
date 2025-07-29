@@ -11,7 +11,7 @@ with chaos-based features extracted via the ChaosFEX transform.
 
 Steps involved:
 ---------------
-1. Loads the Haberman dataset.
+1. Loads the dataset.
 2. Extracts features (X) and labels (y)
 3. Reshapes labels to a 2D array for compatibility.
 4. Splits the dataset into training and testing sets using an 80-20 ratio.
