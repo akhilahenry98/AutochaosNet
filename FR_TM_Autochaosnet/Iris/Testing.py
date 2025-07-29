@@ -7,7 +7,7 @@ Created on Wed Nov 29 10:20:53 2023
 Description:
 ------------
 This script evaluates the classification performance and computational efficiency 
-of the ChaosNet algorithm and chaos-based features extracted 
+of the AutochaosNet algorithm and chaos-based features extracted 
 via the `ChaosFEX` module.
 
 The key steps include:

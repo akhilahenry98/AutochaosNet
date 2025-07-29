@@ -6,7 +6,7 @@ Created on Wed Nov 29 10:20:53 2023
 
 Description:
 ------------
-This script performs classification on the dataset using the ChaosNet algorithm 
+This script performs classification on the dataset using the AutochaosNet algorithm 
 with chaos-based features extracted via the ChaosFEX transform.
 
 Steps involved:
