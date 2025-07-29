@@ -25,14 +25,5 @@ pip install numpy scikit-learn pandas numba
 4. Run the main script: TM_testing.py inside the corresponding dataset folder to execute the classification pipeline.
 
 ## Results
-The models were tested across 10 datasets. F1 Scores are computed for all datasets.
-
-⏱️ Timing Metrics (e.g., average time per iteration) were computed only on the following datasets:
-
-Iris
-
-Seeds
-
-Statlog
-
-Sonar
+The models were tested across 10 datasets. F1 Scores are computed for all datasets - Iris, Haberman, Seeds, Statlog, Cancer, Bank, Ionosphere, Wine, Sonar and Penguin dataset.
+Computational Time (i.e, average elapsed time over 50 iterations) were computed only on the following datasets: Iris, Seeds, Statlog, Sonar
